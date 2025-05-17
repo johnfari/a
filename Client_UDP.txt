@@ -1,0 +1,24 @@
+import socket
+
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+server_address = ("127.0.0.1", 6666)
+print("UDP client started")
+print("Type 'close' to close the chat")
+
+while True:
+    message = input("Client: ")
+    client_socket.sendto(message.encode("UTF-8"), server_address)
+
+    if message.lower() == "close":
+        print("Client closed the connection")
+        break
+
+    data, _ = client_socket.recvfrom(1024)
+    response = data.decode("UTF-8")
+    print("Server message:", response)
+
+    if response.lower() == "close":
+        print("Server closed the connection")
+        break
+
+client_socket.close()

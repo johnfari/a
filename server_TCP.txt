@@ -1,0 +1,32 @@
+import socket
+
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_socket.bind(("127.0.0.1", 6665))
+server_socket.listen(1)
+print("Server socket created and bound to address 127.0.0.1 on port 6665")
+print("Type 'close' to close the chat")
+
+while True:
+    client_socket, client_address = server_socket.accept()
+    print(f"Connection from {client_address}")
+
+    while True:
+        response_data = client_socket.recv(1024)
+        client_message = response_data.decode("UTF-8")
+        print("Client message:", client_message)
+
+        if client_message.lower() == "close":
+            print("Client closed the connection")
+            break
+
+        server_message = input("Server: ")
+        server_data = server_message.encode("UTF-8")
+        client_socket.send(server_data)
+
+        if server_message.lower() == "close":
+            print("Server closed the connection")
+            break
+
+    client_socket.close()
+
+server_socket.close()
