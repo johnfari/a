@@ -1,0 +1,134 @@
+''' 
+Get info
+ 1- What is a socket?
+ 2- Get IP by using the name
+ 3- What is the local IP?
+ 4- Get the name of the site by using the IP
+ 5- Get the port number by using the name of the service
+ 6- Get the name of the service by using its port number
+'''
+
+# 1- What is a socket?
+#Sockets and the socket API are used to send messages across a network. 
+import socket
+
+# 2- Get IP by using the Domain Name
+# Google IP address
+ip1 = socket.gethostbyname("www.google.com")
+print("Google IP:", ip1)
+
+# Facebook IP address
+ip2 = socket.gethostbyname("www.facebook.com")
+print("Facebook IP:", ip2)
+
+# Twitter IP address
+ip3 = socket.gethostbyname("www.twitter.com")
+print("Twitter IP:", ip3)
+
+# 3- What is the local IP?
+# Localhost IP address
+ip4 = socket.gethostbyname("localhost")
+print("Localhost IP:", ip4)
+
+
+
+# 4- Get the Domain Name of the site by using the IP
+# Hostname for IP address 127.0.0.1 (Localhost)
+host1 = socket.gethostbyaddr("127.0.0.1")
+print('Host name by IP (127.0.0.1):', host1)
+print("\n")
+print("Hostname:", host1[0])
+print("Alias names:", host1[1])
+print("IP addresses:", host1[2])
+
+
+# Hostname for IP address 8.8.8.8 (Google DNS)
+host2 = socket.gethostbyaddr("8.8.8.8")
+print('Host name by IP (8.8.8.8):', host2)
+print("\n")
+print("Hostname:", host2[0])
+print("Alias names:", host2[1])
+print("IP addresses:", host2[2])
+
+
+
+# Port number and service
+# 5- Get the port number by using the name of the service
+
+# Telnet (Port 23, TCP): Network protocol used for remote communication
+port_num1 = socket.getservbyname("telnet")
+print("Telnet port (23, TCP):", port_num1)
+
+# SSH (Port 22, TCP): Secure shell for encrypted communication
+port_num2 = socket.getservbyname("ssh", "tcp")
+print("SSH port (22, TCP):", port_num2)
+
+# HTTP (Port 80, TCP): Used for web traffic
+port_num3 = socket.getservbyname("http", "tcp")
+print("HTTP port (80, TCP):", port_num3)
+
+# HTTPS (Port 443, TCP): Used for secure web traffic
+port_num4 = socket.getservbyname("https", "tcp")
+print("HTTPS port (443, TCP):", port_num4)
+
+# Domain Name System (DNS) (Port 53, UDP/TCP): Used for domain name resolution
+port_num5_udp = socket.getservbyname("domain", "udp")
+port_num5_tcp = socket.getservbyname("domain", "tcp")
+print("Domain port (53, UDP):", port_num5_udp)
+print("Domain port (53, TCP):", port_num5_tcp)
+
+# FTP Data (Port 20, TCP): File Transfer Protocol data port
+port_num6_1 = socket.getservbyname("ftp-data", "tcp")
+print("FTP-data port (20, TCP):", port_num6_1)
+
+# FTP Control (Port 21, TCP): File Transfer Protocol control port
+port_num6_2 = socket.getservbyname("ftp", "tcp")
+print("FTP port (21, TCP):", port_num6_2)
+
+# SNMP (Port 161, UDP): Simple Network Management Protocol
+port_num7 = socket.getservbyname("snmp", "udp")
+print("SNMP port (161, UDP):", port_num7)
+
+# POP3 (Port 110, TCP): Post Office Protocol version 3 for email retrieval
+port_num8 = socket.getservbyname("pop3", "tcp")
+print("POP3 port (110, TCP):", port_num8)
+
+# SMTP (Port 25, TCP): Simple Mail Transfer Protocol for email sending
+port_num9 = socket.getservbyname("smtp", "tcp")
+print("SMTP port (25, TCP):", port_num9)
+
+
+
+
+
+# 6- Get the name of the service by using its port number
+
+# Telnet
+port_na1 = socket.getservbyport(23)
+print("Service on port 23 (TCP):", port_na1)
+
+# SSH
+port_na2 = socket.getservbyport(22, "tcp")
+print("Service on port 22 (TCP):", port_na2)
+
+# HTTP
+port_na3 = socket.getservbyport(80, "tcp")
+print("Service on port 80 (TCP):", port_na3)
+
+# HTTPS
+port_na4 = socket.getservbyport(443, "tcp")
+print("Service on port 443 (TCP):", port_na4)
+
+# DNS (UDP/TCP)
+port_na5_udp = socket.getservbyport(53, "udp")
+port_na5_tcp = socket.getservbyport(53, "tcp")
+print("Service on port 53 (UDP):", port_na5_udp)
+print("Service on port 53 (TCP):", port_na5_tcp)
+
+# FTP Data
+port_na6_1 = socket.getservbyport(20, "tcp")
+print("Service on port 20 (TCP):", port_na6_1)
+
+# FTP Control
+port_na6_2 = socket.getservbyport(21, "tcp")
+print("Service on port 21 (TCP):", port_na6_2)
